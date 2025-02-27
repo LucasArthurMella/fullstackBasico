@@ -1,15 +1,17 @@
 import {  Inject, Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { Product, ProductDocument } from './entities/product.entity';
+import { Product } from './entities/product.entity';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { Cacheable } from 'cacheable';
+import { Order } from 'src/orders/entities/order.entity';
 
 @Injectable()
 export class ProductsService {
   
   @InjectModel(Product.name) private productModel: Model<Product>
+  @InjectModel(Order.name) private orderModel: Model<Order>
   constructor(
     @Inject("CACHE_INSTANCE") private readonly cache: Cacheable
   )
@@ -39,7 +41,18 @@ export class ProductsService {
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
+    const oldProduct = await this.productModel.findById(id);
     const updatedProduct = await this.productModel.findByIdAndUpdate(id, updateProductDto, {new: true});
+
+   //if (updatedProduct.name !== oldProduct.name) {
+   // await this.productModel.updateMany(
+   //   { "productsWithQuantities.product": id }, 
+   //   { $set: { "productsWithQuantities.$[elem].productName": updateProductDto.name } },
+   //   { arrayFilters: [{ "elem.product": new mongoose.Types.ObjectId(id) }] }
+   // );
+   //
+   // }
+
     await this.cache.delete("all_products");
     return updatedProduct;
   }

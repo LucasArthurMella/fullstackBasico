@@ -1,0 +1,21 @@
+<div class="login-container">
+  <h2 class="title">Login</h2>
+
+<div class="form-container">
+  <mat-form-field appearance="outline" [style.width.px]=327>
+    <input type="text" matInput placeholder="Login" [(ngModel)]="login">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline" [style.width.px]=327>
+    <input type="password" matInput placeholder="Senha" [(ngModel)]="password">
+  </mat-form-field>
+
+    <!--<input type="login" [(ngModel)]="login" placeholder="Login" required />-->
+    <!--<input type="password" [(ngModel)]="password" placeholder="Password" required />-->
+
+  <button mat-raised-button color="primary" (click)="onLogin()">Confirmar</button>
+
+
+  </div>
+
+</div>

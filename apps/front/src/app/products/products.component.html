@@ -1,0 +1,67 @@
+<mat-toolbar color="primary" class="header-nav">
+  <span>Lista de Produtos</span>
+</mat-toolbar>
+
+<div class="form-container">
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Nome" [(ngModel)]="newProduct.name">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+  <textarea placeholder="Descrição" [(ngModel)]="newProduct.description"
+            matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="4"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <input matInput type="number" placeholder="Preço" [(ngModel)]="newProduct.price">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="addProduct()">Adicionar Produto</button>
+</div>
+
+<div class="product-list">
+  <mat-card *ngFor="let product of products; let i = index" class="product-card">
+    <div *ngIf="!product.editing">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <p><strong>Preço:</strong> ${{ product.price }}</p>
+
+      <div class="actions">
+        <button mat-icon-button color="accent" (click)="editProduct(product._id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteProduct(product._id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="product.editing" class="edit-fields">
+      <mat-form-field appearance="outline">
+        <input matInput [value]="product.name" #editName>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput [value]="product.description" #editDescription>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput type="number" [value]="product.price" #editPrice>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-icon-button color="primary"
+                (click)="saveEdit(product._id, editName.value, editDescription.value, +editPrice.value)">
+          <mat-icon>check</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="cancelEdit(product._id)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div> </mat-card>
+</div>

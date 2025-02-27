@@ -1,0 +1,46 @@
+<mat-toolbar color="primary" class="header-nav">
+  <span>Pedidos</span>
+</mat-toolbar>
+
+<div class="form-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Selecionar</mat-label>
+    <mat-select [(ngModel)]="selectedProductId">
+      <mat-option *ngFor="let product of products" [value]="product._id">
+        {{ product.name }} - ${{ product.price }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <input matInput type="number" placeholder="Quantity" [(ngModel)]="quantity" min="1">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="addToCurrentOrder()">Add to Order</button>
+</div>
+
+<div class="order-list" *ngIf="currentOrder.length > 0">
+  <mat-card class="order-card">
+    <h3>Current Order</h3>
+    <ul>
+      <li *ngFor="let item of currentOrder">
+        {{ item.product.name }} (x{{ item.quantity }})
+      </li>
+    </ul>
+    <div class="order-actions">
+      <button style="word-break: break-word;" mat-raised-button color="accent" (click)="finalizeOrder()">Finalize Order</button>
+      <button mat-raised-button color="warn" (click)="cancelOrder()">Cancel Order</button>
+    </div>
+  </mat-card>
+</div>
+
+<div class="order-list">
+  <mat-card *ngFor="let order of orders; let i = index" class="order-card">
+    <h3>Order #{{ order._id }}</h3>
+    <ul>
+      <li *ngFor="let item of order.productsWithQuantities">
+        {{ item.product.name }} (x{{ item.quantity }})
+      </li>
+    </ul>
+  </mat-card>
+</div>

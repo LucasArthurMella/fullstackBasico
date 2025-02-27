@@ -1,0 +1,16 @@
+
+.header-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.center-buttons {
+  display: flex;
+  gap: 16px;
+}
+

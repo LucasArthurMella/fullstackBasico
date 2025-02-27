@@ -1,0 +1,25 @@
+
+.login-container {
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  text-align: center;
+  background-color: #101414;
+}
+.title {
+  color: white;
+}
+input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+}
