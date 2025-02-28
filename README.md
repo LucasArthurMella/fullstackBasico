@@ -31,6 +31,8 @@ Certifique-se de ter o Docker e o Docker Compose instalados e rodando, e então 
   docker-compose build
   docker-compose up
 ```
+Caso você esteja com o Redis rodando é sugerível parar a execução dele para evitar conflitos com o Redis do docker. 
+
 ## Rodar o Projeto em Desenvolvimento localmente
 
 Certifique-se de ter o Redis instalado e rodando, e sua URL corretamente colocada na váriavel de ambiente, e então:
