@@ -62,7 +62,6 @@ export class OrdersComponent implements OnInit {
   ngOnInit(){
     this.getProducts();
     this.getOrders();
-    console.log(this.orders);
   }
   getProducts(){
     this.authService.checkLoginState();
@@ -98,7 +97,6 @@ export class OrdersComponent implements OnInit {
       this.http.get(`${environment.API_URL}/orders`, {headers})
         .subscribe((data) => {
           const listedProducts = data as any[];
-          console.log(data);
           this.orders = listedProducts.map((cur) => {
 
             const productsWithQuantities = cur.productsWithQuantities.map((cur: any) => ({
@@ -124,14 +122,12 @@ export class OrdersComponent implements OnInit {
   }
 
   addToCurrentOrder() {
-    console.log(this.selectedProductId!);
     if (this.selectedProductId && this.quantity > 0) {
 
       const existingItem = this.currentOrder.find(item => item.product._id === this.selectedProductId!);
       if (existingItem) {
         existingItem.quantity += this.quantity;
       } else {
-        console.log(this.selectedProductId);
         const currentProduct = this.products.find((cur) => cur._id == this.selectedProductId);
         this.currentOrder.push({ product: currentProduct!, quantity: this.quantity, productId: this.selectedProductId});
       }
@@ -157,7 +153,6 @@ export class OrdersComponent implements OnInit {
           quantity: cur.quantity
         }))
       };
-      console.log(body);
 
       this.http.post(`${environment.API_URL}/orders`, body, {headers})
         .subscribe((_data) => {

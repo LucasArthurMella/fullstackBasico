@@ -1,0 +1,36 @@
+version: '1.0'
+
+services:
+  backend:
+    build: ./apps/back
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379
+    env_file:
+      - apps/back/.env
+    networks:
+      - app-network
+
+  frontend:
+    build: ./apps/front
+    ports:
+      - "4000:4000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

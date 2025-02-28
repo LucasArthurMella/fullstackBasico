@@ -32,10 +32,10 @@ class ProductWithQuantity {
 
 @Schema({timestamps: true})
 export class Order {
-  @Prop({
-    type: [ProductWithQuantity],
+  @Prop([{
+    type: ProductWithQuantity,
     required: true
-  })
+  }])
   productsWithQuantities: ProductWithQuantity[];
 }
 

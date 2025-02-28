@@ -16,7 +16,7 @@
     <input matInput type="number" placeholder="Quantity" [(ngModel)]="quantity" min="1">
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="addToCurrentOrder()">Add to Order</button>
+  <button mat-raised-button color="primary" (click)="addToCurrentOrder()">Adicionar ao Pedido</button>
 </div>
 
 <div class="order-list" *ngIf="currentOrder.length > 0">
@@ -28,8 +28,8 @@
       </li>
     </ul>
     <div class="order-actions">
-      <button style="word-break: break-word;" mat-raised-button color="accent" (click)="finalizeOrder()">Finalize Order</button>
-      <button mat-raised-button color="warn" (click)="cancelOrder()">Cancel Order</button>
+      <button mat-raised-button color="accent" (click)="finalizeOrder()">FInalizar Pedido</button>
+      <button mat-raised-button color="warn" (click)="cancelOrder()">Cancelar Pedido</button>
     </div>
   </mat-card>
 </div>

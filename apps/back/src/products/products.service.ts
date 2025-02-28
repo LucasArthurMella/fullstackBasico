@@ -43,15 +43,16 @@ export class ProductsService {
   async update(id: string, updateProductDto: UpdateProductDto) {
     const oldProduct = await this.productModel.findById(id);
     const updatedProduct = await this.productModel.findByIdAndUpdate(id, updateProductDto, {new: true});
+  
 
-   //if (updatedProduct.name !== oldProduct.name) {
-   // await this.productModel.updateMany(
-   //   { "productsWithQuantities.product": id }, 
-   //   { $set: { "productsWithQuantities.$[elem].productName": updateProductDto.name } },
-   //   { arrayFilters: [{ "elem.product": new mongoose.Types.ObjectId(id) }] }
-   // );
-   //
-   // }
+   if (updatedProduct.name !== oldProduct.name) {
+    // Mudando o dado fixo do nome do produto de todos os orders que possuem esse produto,
+    await this.orderModel.updateMany(
+      { "productsWithQuantities.product": id }, 
+      { $set: { "productsWithQuantities.$[elem].productName": updateProductDto.name } },
+      { arrayFilters: [{ "elem.product": new mongoose.Types.ObjectId(id) }] }
+    );
+    }
 
     await this.cache.delete("all_products");
     return updatedProduct;

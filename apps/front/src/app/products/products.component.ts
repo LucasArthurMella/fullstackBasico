@@ -116,7 +116,6 @@ export class ProductsComponent implements OnInit {
 
   saveEdit(id: string, name: string, description: string, price: number) {
 
-    console.log("aaa");
     if (name.trim() && description.trim() && price >= 0.01) {
       this.authService.checkLoginState();
       const bearerToken = this.authService.getToken();

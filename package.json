@@ -1,0 +1,28 @@
+{
+  "name": "fullstackbasico",
+  "version": "1.0.0",
+  "description": "Fullstack básico desmonstrando o uso de angular no frontend e nestjs no backend.",
+  "keywords": [
+    "fullstack",
+    "backend",
+    "frontend",
+    "nestjs",
+    "angular"
+  ],
+  "homepage": "https://github.com/LucasArthurMella/fullstackBasico#readme",
+  "bugs": {
+    "url": "https://github.com/LucasArthurMella/fullstackBasico/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasArthurMella/fullstackBasico.git"
+  },
+  "license": "ISC",
+  "author": "Lucas Mella",
+  "scripts": {
+    "install-all": "npm --prefix ./apps/back install && npm --prefix ./apps/front install",
+    "build-all": "npm --prefix ./apps/back run build && npm --prefix ./apps/front run build",
+    "start-all:dev": "npm --prefix ./apps/back run start:dev & npm --prefix ./apps/front run start",
+    "start-all:prod": "npm --prefix ./apps/back run start:prod & npm --prefix ./apps/front run serve:ssr:front"
+  }
+}

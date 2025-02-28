@@ -23,7 +23,7 @@ export class LoginComponent {
     console.log("login");
 
     this.authService.login({ login: this.login, password: this.password }).subscribe({
-      error: err => alert('Falha ao logar!'),
+      error: _err => alert('Falha ao logar!'),
     });
   }
 }
